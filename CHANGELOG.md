@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Visibility and constructor exposure of `Campaign` attributes that should be private
 - `TaskParameter`s no longer disappear from computational representation when the
   search space contains only one task parameter value
+- tox `coretest` now uses correct environment and skips impossible tests
 
 ### Removed
 - Detailed headings in table of contents of examples
