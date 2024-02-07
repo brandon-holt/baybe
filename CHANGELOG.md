@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Imports from top level `baybe.utils` no longer possible
 - Renamed `utils.numeric` to `utils.numerical`
 - Optional `chem` dependencies are lazily imported, improving startup time
+- Minimized torch dependency and only load it when required [WIP].
 
 ### Fixed
 - Several minor issues in documentation
