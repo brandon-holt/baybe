@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Any, Collection, List, Optional
+from typing import TYPE_CHECKING, Any, Collection, List, Optional
 
 import numpy as np
 import pandas as pd
-import torch
 from attr import define, field
 
 from baybe.constraints import (
@@ -18,6 +17,9 @@ from baybe.parameters.utils import get_parameters_from_dataframe
 from baybe.searchspace.validation import validate_parameter_names
 from baybe.serialization import SerialMixin, converter, select_constructor_hook
 from baybe.utils.numerical import DTypeFloatTorch
+
+if TYPE_CHECKING:
+    from torch import Tensor
 
 
 @define
@@ -117,8 +119,11 @@ class SubspaceContinuous(SerialMixin):
         return [p.name for p in self.parameters]
 
     @property
-    def param_bounds_comp(self) -> torch.Tensor:
+    def param_bounds_comp(self) -> Tensor:
         """Return bounds as tensor."""
+        # Delay importing torch to speed up BayBE loading
+        import torch
+
         if not self.parameters:
             return torch.empty(2, 0, dtype=DTypeFloatTorch)
         return torch.stack([p.bounds.to_tensor() for p in self.parameters]).T
