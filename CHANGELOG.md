@@ -14,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Order of README sections
-- Optional `chem` dependencies are lazily imported, which improves startup time
 - Imports from top level `baybe.utils` no longer possible
 - Renamed `utils.numeric` to `utils.numerical`
 - Optional `chem` dependencies are lazily imported, improving startup time
