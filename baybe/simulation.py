@@ -607,9 +607,17 @@ def _look_up_target_values(
         #   column ordering, which is not robust. Instead, the callable should return
         #   a dataframe with properly labeled columns.
 
+        # For evaluating the lookup function, we need to filter the task parameter
+        task_param_names = [
+            p.name for p in campaign.parameters if isinstance(p, TaskParameter)
+        ]
+        filtered_queries = queries.drop(columns=task_param_names)
+
         # Since the return of a lookup function is a a tuple, the following code stores
         # tuples of floats in a single column with label 0:
-        measured_targets = queries.apply(lambda x: lookup(*x.values), axis=1).to_frame()
+        measured_targets = filtered_queries.apply(
+            lambda x: lookup(*x.values), axis=1
+        ).to_frame()
         # We transform this column to a DataFrame in which there is an individual
         # column for each of the targets....
         split_target_columns = pd.DataFrame(
