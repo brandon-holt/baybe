@@ -13,6 +13,6 @@ class MaternKernel(Kernel):
     nu: float = field(converter=float, validator=in_([0.5, 1.5, 2.5]), default=2.5)
     """A smoothness parameter.
 
-    It only takes the values 0.5, 1.5 or 2.5. Smaller values are less smooth.
+    Only takes the values 0.5, 1.5 or 2.5. Larger values yield smoother interpolations.
     The value 2.5 is chosen as default.
     """
