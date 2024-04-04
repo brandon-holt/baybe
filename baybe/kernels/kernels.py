@@ -14,5 +14,4 @@ class MaternKernel(Kernel):
     """A smoothness parameter.
 
     Only takes the values 0.5, 1.5 or 2.5. Larger values yield smoother interpolations.
-    The value 2.5 is chosen as default.
     """
