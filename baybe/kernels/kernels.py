@@ -1,4 +1,4 @@
-"""The matern kernel."""
+"""Collection of usable kernels."""
 
 from attrs import define, field
 from attrs.validators import in_
