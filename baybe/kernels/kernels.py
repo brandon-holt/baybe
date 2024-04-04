@@ -1,4 +1,4 @@
-"""Collection of usable kernels."""
+"""Collection of kernels."""
 
 from attrs import define, field
 from attrs.validators import in_
