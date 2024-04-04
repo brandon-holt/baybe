@@ -1,18 +1,13 @@
 """Test serialization of Kernels."""
 
-import pytest
+from hypothesis import given
 
-from baybe.kernels import Kernel, MaternKernel
-
-KERNELS = [
-    MaternKernel(nu=0.5),
-    MaternKernel(nu=1.5),
-    MaternKernel(nu=2.5),
-]
+from baybe.kernels import MaternKernel
+from tests.hypothesis_strategies.kernels import matern_strategy
 
 
-@pytest.mark.parametrize("kernel", KERNELS)
-def test_objective_serialization(kernel):
+@given(matern_strategy)
+def test_matern_kernel_roundtrip(kernel: MaternKernel):
     string = kernel.to_json()
-    kernel2 = Kernel.from_json(string)
+    kernel2 = MaternKernel.from_json(string)
     assert kernel == kernel2
