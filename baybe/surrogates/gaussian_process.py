@@ -14,7 +14,8 @@ from gpytorch.means import ConstantMean
 from gpytorch.priors import GammaPrior
 from torch import Tensor
 
-from baybe.kernels import Kernel, MaternKernel
+from baybe.kernels import MaternKernel
+from baybe.kernels.base import Kernel
 from baybe.searchspace import SearchSpace
 from baybe.surrogates.base import Surrogate
 from baybe.surrogates.validation import get_model_params_validator
