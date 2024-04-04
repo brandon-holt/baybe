@@ -1,4 +1,4 @@
-"""Kernels that can be used for GP surrogate models."""
+"""Kernels for Gaussian process surrogate models."""
 
 from baybe.kernels.base import Kernel
 from baybe.kernels.kernels import MaternKernel
