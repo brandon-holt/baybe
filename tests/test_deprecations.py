@@ -151,4 +151,4 @@ def test_deprecated_strategy_campaign_flag(recommender):
 def test_deprecated_acqfs(acqf):
     """Using the deprecated acqf raises a warning."""
     with pytest.warns(DeprecationWarning):
-        SequentialGreedyRecommender(acquisition_function_cls=acqf)
+        SequentialGreedyRecommender(acqf=acqf)
