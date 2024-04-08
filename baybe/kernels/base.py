@@ -16,13 +16,20 @@ from baybe.serialization.mixin import SerialMixin
 class Kernel(ABC, SerialMixin):
     """Abstract base class for all kernels."""
 
-    def to_gpytorch(self, **kwargs):
+    def to_gpytorch(self, *args, **kwargs):
         """Create the gpytorch-ready representation of the kernel."""
         import gpytorch.kernels
 
         kernel_cls = getattr(gpytorch.kernels, self.__class__.__name__)
 
-        return kernel_cls(**kwargs)
+        # Get the fields of the actual class via unstructure_base
+        fields_dict = unstructure_base(self)
+        # Filter the type out
+        fields = {field: fields_dict[field] for field in fields_dict if field != "type"}
+        # Update kwargs to contain class-specific parameters
+        kwargs.update(fields)
+
+        return kernel_cls(*args, **kwargs)
 
 
 # Register de-/serialization hooks
