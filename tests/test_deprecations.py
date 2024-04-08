@@ -7,6 +7,7 @@ import pytest
 from baybe import BayBE, Campaign
 from baybe.exceptions import DeprecationError
 from baybe.recommenders.meta.sequential import TwoPhaseMetaRecommender
+from baybe.recommenders.pure.bayesian import SequentialGreedyRecommender
 from baybe.recommenders.pure.nonpredictive.sampling import (
     FPSRecommender,
     RandomRecommender,
@@ -144,3 +145,10 @@ def test_deprecated_strategy_campaign_flag(recommender):
     """Using the deprecated strategy keyword raises an error."""
     with pytest.raises(DeprecationError):
         Campaign(None, None, None, strategy=recommender)
+
+
+@pytest.mark.parametrize("acqf", ("VarUCB", "qVarUCB"))
+def test_deprecated_acqfs(acqf):
+    """Using the deprecated acqf raises a warning."""
+    with pytest.warns(DeprecationWarning):
+        SequentialGreedyRecommender(acquisition_function_cls=acqf)
