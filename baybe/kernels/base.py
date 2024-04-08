@@ -10,6 +10,7 @@ from baybe.serialization.core import (
     unstructure_base,
 )
 from baybe.serialization.mixin import SerialMixin
+from baybe.utils.basic import get_init_attributes
 
 
 @define(frozen=True)
@@ -21,13 +22,12 @@ class Kernel(ABC, SerialMixin):
         import gpytorch.kernels
 
         kernel_cls = getattr(gpytorch.kernels, self.__class__.__name__)
+        fields_dict = get_init_attributes(
+            kernel_cls, self, ignored_keys=("self", "kwargs")
+        )
 
-        # Get the fields of the actual class via unstructure_base
-        fields_dict = unstructure_base(self)
-        # Filter the type out
-        fields = {field: fields_dict[field] for field in fields_dict if field != "type"}
-        # Update kwargs to contain class-specific parameters
-        kwargs.update(fields)
+        # Update kwargs to contain class-specific attributes
+        kwargs.update(fields_dict)
 
         return kernel_cls(*args, **kwargs)
 

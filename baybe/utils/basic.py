@@ -3,6 +3,7 @@
 import random
 from collections.abc import Iterable
 from dataclasses import dataclass
+from inspect import signature
 from typing import Callable, TypeVar
 
 import numpy as np
@@ -88,3 +89,20 @@ def group_duplicate_values(dictionary: dict[_T, _U]) -> dict[_U, list[_T]]:
     for key, value in dictionary.items():
         group.setdefault(value, []).append(key)
     return {k: v for k, v in group.items() if len(v) > 1}
+
+
+def get_init_attributes(
+    first: type, second: type, ignored_keys: tuple[str, ...] = ("self", "kwargs")
+) -> dict:
+    """Get attributes of `second` which are contained in the `__init__` of `first`.
+
+    Args:
+        first: The class whose `__init__` function is being checked.
+        second: The class whose attributes are extracted.
+        ignored_keys: A tuple of keys that should be ignored.
+
+    Returns:
+        The dictionary of parameters.
+    """
+    params = signature(first.__init__).parameters
+    return {p: getattr(second, p) for p in params if p not in ignored_keys}
