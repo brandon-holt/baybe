@@ -28,12 +28,6 @@ def test_moved_objective(targets):
         Objective(mode="SINGLE", targets=targets)
 
 
-def test_renamed_surrogate():
-    """Importing from ``baybe.surrogate`` raises a warning."""
-    with pytest.warns(DeprecationWarning):
-        from baybe.surrogate import GaussianProcessSurrogate  # noqa: F401
-
-
 def test_missing_recommender_type(config):
     """Specifying a recommender without a corresponding type raises a warning."""
     dict_ = json.loads(config)
