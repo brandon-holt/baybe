@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `mypy` for search space
 - Class hierarchy for objectives
+- `hypothesis` strategies and roundtrip test for objectives
 
 ### Changed
 - `torch` numeric types are now loaded lazily
@@ -162,7 +163,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Wrong use of `tolerance` argument in constraints user guide
 - Errors with generics and type aliases in documentation
-- Deduplication bug in substance_data hypothesis 
+- Deduplication bug in substance_data `hypothesis` strategy
 - Use pydoclint as flake8 plugin and not as a stand-alone linter
 - Margins in documentation for desktop and mobile version
 - `Interval`s can now also be deserialized from a bounds iterable
