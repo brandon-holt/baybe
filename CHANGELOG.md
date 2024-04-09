@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 - `mypy` for search space
-- Deserialization is now possible from optional abbreviations and class name strings
+- Deserialization is now also possible from optional class name abbreviations
 - Hypothesis strategies for acquisition functions
 
 ### Changed
@@ -15,13 +15,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reorganized acquisition.py into `acquisition` subpackage
 - `torch` is imported lazily in `surrogates`
 - Acquisition functions are now their own objects
-- `acquisition_function_cls` renamed to `acqf`
+- `acquisition_function_cls` constructor parameter renamed to `acqf`
 
 ### Fixed
 - `n_task_params` now evaluates to 1 if `task_idx == 0`
 
 ### Deprecations
-- `acquisition_function_cls` keyword for the respective recommenders
+- `acquisition_function_cls` constructor parameter for  `BayesianRecommender`
 - `VarUCB` and `qVarUCB` acquisition functions
 
 ## [0.8.2] - 2024-03-27
