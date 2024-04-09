@@ -4,14 +4,13 @@ import json
 
 import pytest
 
-from baybe import BayBE, Campaign
+from baybe import Campaign
 from baybe.exceptions import DeprecationError
 from baybe.recommenders.meta.sequential import TwoPhaseMetaRecommender
 from baybe.recommenders.pure.nonpredictive.sampling import (
     FPSRecommender,
     RandomRecommender,
 )
-from baybe.searchspace import SearchSpace
 from baybe.strategies import (
     SequentialStrategy,
     Strategy,
@@ -21,12 +20,6 @@ from baybe.strategies import (
 from baybe.targets import Objective
 from baybe.targets.base import Target
 from baybe.utils.interval import Interval
-
-
-def test_deprecated_baybe_class(parameters, objective):
-    """Using the deprecated ``BayBE`` class raises a warning."""
-    with pytest.warns(DeprecationWarning):
-        BayBE(SearchSpace.from_product(parameters), objective)
 
 
 def test_moved_objective(targets):
