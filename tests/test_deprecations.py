@@ -5,6 +5,7 @@ import json
 import pytest
 
 from baybe import BayBE, Campaign
+from baybe.acquisition.base import AcquisitionFunction
 from baybe.exceptions import DeprecationError
 from baybe.recommenders.meta.sequential import TwoPhaseMetaRecommender
 from baybe.recommenders.pure.bayesian import SequentialGreedyRecommender
@@ -152,6 +153,9 @@ def test_deprecated_acqfs(acqf):
     """Using the deprecated acqf raises a warning."""
     with pytest.warns(DeprecationWarning):
         SequentialGreedyRecommender(acqf=acqf)
+
+    with pytest.warns(DeprecationWarning):
+        AcquisitionFunction.from_dict({"type": acqf})
 
 
 def test_deprecated_acqf_keyword(acqf):
